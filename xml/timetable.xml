@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schedule>
+    <gorod name="Минск">
+        <shop>
+            <time>09:20-21:00</time>
+            <number>+375(29)108-91-64</number>
+            <adres>Улица Скрыганово,16</adres>
+        </shop>
+    </gorod>
+
+    <gorod name="Жодино">
+        <shop>
+            <time>08:20-20:00</time>
+            <number>+375(29)110-91-64</number>
+            <adres>Улица Курганово,21</adres>
+        </shop>
+    </gorod>
+
+    <gorod name="Борисов">
+        <shop>
+            <time>10:20-22:00</time>
+            <number>+375(29)151-91-64</number>
+            <adres>Улица Фонарная,67</adres>
+        </shop>
+    </gorod>
+
+    <gorod name="Брест">
+        <shop>
+            <time>09:00-21:00</time>
+            <number>+375(29)149-91-64</number>
+            <adres>Улица Гагарина,24</adres>
+        </shop>
+    </gorod>
+</schedule>
+

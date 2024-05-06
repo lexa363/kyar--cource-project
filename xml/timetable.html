@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазины</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
+    <style>
+        /* Обновленные стили для заголовка */
+        h1 {
+            font-size: 36px;
+            color: #BE5AC3;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            background-color: #FADADD; /* Новый статичный фон */
+        }
+
+        /* Обновленные стили для контейнера расписания */
+        .schedule-container {
+            background-color: #F9F9F9;
+            padding: 30px;
+            border: 1px solid #DDD;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background-color: #FAF0E6; /* Новый статичный фон */
+        }
+
+        /* Обновленные стили для города */
+        .city {
+            margin-bottom: 30px;
+            padding: 30px;
+            background-color: #EDEDED;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #BE5AC3;
+            background-color: #FADADD; /* Новый статичный фон */
+        }
+
+        /* Обновленные стили для названия города */
+        .city h2 {
+            font-size: 28px;
+            color: #BE5AC3;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Обновленные стили для магазина */
+        .shop {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #FFF;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-top: 3px solid #BE5AC3;
+            background-color: #FADADD; /* Новый статичный фон */
+        }
+
+        /* Обновленные стили для времени работы */
+        .shop strong {
+            font-weight: bold;
+            color: #777;
+        }
+
+        /* Обновленные стили для ссылок */
+        a {
+            color: #BE5AC3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #8E3B8D;
+            text-decoration: underline;
+        }
+
+        /* Фон для всей страницы */
+        body {
+            background-color: #FAF0E6; /* Новый статичный фон */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Наши магазины</h1>
+    <div class='nav'>
+        <a class='nav-item' href="/restoran/index.html">ГЛАВНАЯ</a>
+    </div>
+    
+    <div class="schedule-container" id="schedule-container"></div>
+
+    <script>
+        
+        $(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "timetable.xml",
+        dataType: "xml",
+        success: function (xml) {
+            $(xml).find('gorod').each(function () {
+                var cityName = $(this).attr('name');
+                var citySchedule = '<div class="city"><h2>' + cityName + '</h2>';
+                $(this).find('shop').each(function () {
+                    var time = $(this).find('time').text();
+                    var number = $(this).find('number').text();
+                    var address = $(this).find('adres').text();
+                    citySchedule += '<div class="shop"><strong>Время работы: </strong>' + time + '<br>' +
+                        '<strong>Номер телефона: </strong>' + number + '<br>' +
+                        '<strong>Адрес: </strong>' + address + '</div>';
+                });
+                citySchedule += '</div>';
+                $('#schedule-container').append(citySchedule);
+            });
+        },
+        error: function () {
+            $('#schedule-container').html('Ошибка загрузки расписания.');
+        }
+    });
+});
+    </script>
+</body>
+
+</html>
